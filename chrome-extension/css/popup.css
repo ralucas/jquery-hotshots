@@ -1,0 +1,18 @@
+body {
+    width: 32em;
+    padding: 0 2em;
+}
+
+header {
+    padding-top: 2em;
+}
+
+ul {
+    padding: 0 0 1em;
+    font-size: 1.5em;
+}
+
+iframe {
+    display: none;
+}
+

@@ -1,0 +1,12 @@
+{
+    "name": "Web Contacts",
+    "version": "1.0",
+    "manifest_version": 2,
+    "description": "Scrape web pages for Schema.org micro-data",
+    "browser_action": {
+        "default_popup": "popup.html"
+    },
+    "sandbox": {
+        "pages": ["template.html"]
+    }
+}

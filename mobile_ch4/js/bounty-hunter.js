@@ -73,4 +73,48 @@
         $('#search').closest('.ui-btn').removeClass('ui-disabled');
     });
 
+
+    $(document).on('pageinit', '#list', function() {
+        var data = JSON.parse(localStorage.getItem('res')),
+            total = parseInt(data.total, 10),
+            size = parseInt(data.page_size, 10),
+            totalPages = Math.ceil(total/size),
+            months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+        var createDate = function(date) {
+            var cDate = new Date(date * 1000),
+                fDate = [cDate.getDate(), months[cDate.getMonth()], cDate.getFullYear()].join(' ');
+                return fDate;
+        };
+
+        $.views.helpers({ CreateDate: createDate });
+
+        $('#results')
+            .append($('#listTemplate')
+                .render(data))
+            .find('ul')
+            .listview();
+
+        var setClasses = function() {
+            if (data.currentPage > 1) {
+                $('a[data-icon="back"]').removeClass('ui-disabled');
+            } else {
+                $('a[data-icon="back"]').addClass('ui-disabled');
+            }
+
+            if (data.currentPage < totalPages) {
+                $('a[data-icon="forward"]').removeClass('ui-disabled');
+            } else {
+                $('a[data-icon="forward"]').addClass('ui-disabled');
+            }
+        };
+
+        $('span.num').text(data.currentPage);
+        $('span.of').text(totalPages);
+
+        if (totalPages > 1) {
+            $('a[data-icon="forward"]').removeClass('ui-disabled');
+        }
+    });
+
 }());
